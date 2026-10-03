@@ -1,4 +1,4 @@
-use crate::{BASE_URL, Error, PickcatAccound};
+use crate::{Error, PickcatAccound};
 
 use crate::dto::auth::{
     CurrentQuestionDTO, ExamStatusDTO, RegistrationDTO, SendRegistrationDTO, SendVerifyEmailDTO,
@@ -40,7 +40,7 @@ impl UserBehavior for PickcatAccound {
     async fn get_current_user_session(&self) -> Result<SessionDTO, Error> {
         Ok(self
             .client
-            .get(format!("{}/api/v1/session", BASE_URL))
+            .get(format!("{}/api/v1/session", self.base_url))
             .send()
             .await?
             .json::<SessionDTO>()
@@ -60,7 +60,7 @@ impl UserBehavior for PickcatAccound {
         };
         Ok(self
             .client
-            .post(format!("{}/api/v1/registrations", BASE_URL))
+            .post(format!("{}/api/v1/registrations", self.base_url))
             .json(&dto)
             .send()
             .await?
@@ -80,7 +80,7 @@ impl UserBehavior for PickcatAccound {
         };
         Ok(self
             .client
-            .patch(format!("{}/api/v1/registrations/{}", BASE_URL, id))
+            .patch(format!("{}/api/v1/registrations/{}", self.base_url, id))
             .json(&dto)
             .send()
             .await?
@@ -91,7 +91,7 @@ impl UserBehavior for PickcatAccound {
     async fn get_exam_status(&self) -> Result<ExamStatusDTO, Error> {
         Ok(self
             .client
-            .get(format!("{}/api/v1/entrance-exam", BASE_URL))
+            .get(format!("{}/api/v1/entrance-exam", self.base_url))
             .send()
             .await?
             .json::<ExamStatusDTO>()
@@ -101,7 +101,7 @@ impl UserBehavior for PickcatAccound {
     async fn start_exam(&self) -> Result<StartExamDTO, Error> {
         Ok(self
             .client
-            .post(format!("{}/api/v1/entrance-exam/attempts", BASE_URL))
+            .post(format!("{}/api/v1/entrance-exam/attempts", self.base_url))
             .send()
             .await?
             .json::<StartExamDTO>()
@@ -113,7 +113,7 @@ impl UserBehavior for PickcatAccound {
             .client
             .get(format!(
                 "{}/api/v1/entrance-exam/attempts/{}/current-question",
-                BASE_URL, id
+                self.base_url, id
             ))
             .send()
             .await?
@@ -137,7 +137,7 @@ impl UserBehavior for PickcatAccound {
             .client
             .patch(format!(
                 "{}/api/v1/entrance-exam/attempts/{}/current-question",
-                BASE_URL, exam_id
+                self.base_url, exam_id
             ))
             .json(&dto)
             .send()
