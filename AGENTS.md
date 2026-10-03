@@ -5,7 +5,7 @@ Pickcat 社区 API 的 Rust 客户端（edition 2024），基于 `reqwest`，没
 
 ## 常用命令
 
-- `cargo test` —— 只运行离线契约测试（`tests/*_contract.rs`）。所有联网测试都是 `#[ignore]`，默认不联网、不需要凭据。
+- `cargo test` —— 运行不联网的测试：DTO 契约测试（`tests/*_contract.rs`）与 mock-server 行为测试（`tests/http_*.rs`）。所有联网测试都是 `#[ignore]`，默认不联网、不需要凭据。
 - `cargo test -- --ignored --nocapture` —— 运行联网测试；需要 `.env` 中有效的 `USERNAME` / `PASSWORD`。
 - 单文件 / 单测：
   - `cargo test --test user_contract`
@@ -16,7 +16,7 @@ Pickcat 社区 API 的 Rust 客户端（edition 2024），基于 `reqwest`，没
 
 ## 模块边界
 
-- `src/lib.rs`：`Error`、`PickcatAccound`（登录并持有带 cookie store 的 `reqwest::Client`）、私有常量 `BASE_URL`（模块内用 `crate::BASE_URL`）。
+- `src/lib.rs`：`Error`、`PickcatAccound`（登录并持有带 cookie store 的 `reqwest::Client`）、私有常量 `BASE_URL`（模块内用 `self.base_url`）。`PickcatAccound::with_base_url()` 可指向 mock server，行为方法一律用 `self.base_url` 拼 URL。
 - `src/auth.rs`：trait `UserBehavior` —— 会话、注册、邮箱验证、入站考试（状态 / 开始 / 取当前题 / 交答案）。
 - `src/user.rs`：trait `UserProfileBehavior` —— 用户章节全部接口（资料/修改资料、邮箱、关注/粉丝、主题/回帖、精选主题/合集、徽章、动态、等级贡献/进度、配额、书签、预设头像）。
 - `src/topic.rs`：trait `TopicBehavior` —— 主题与内容章节（主题列表/推荐/详情、楼层、发布主题/回帖、投稿审核）；`generate_idempotency_key()` 生成写接口所需的 `Idempotency-Key`。
@@ -28,7 +28,7 @@ Pickcat 社区 API 的 Rust 客户端（edition 2024），基于 `reqwest`，没
 ## 新增接口 / 测试的约定
 
 - 按现有模式：在对应模块定义 trait（方法返回 `impl Future<Output = Result<DTO, Error>> + Send`），再为 `PickcatAccound` 实现。
-- 测试分文件：离线契约测试放 `tests/<area>_contract.rs`（用文档 JSON 做 `serde_json::from_str`，验证 rename 映射，默认运行）；联网测试放 `tests/<area>_live.rs`，全部标 `#[ignore = "hits the live API; ..."]`。
+- 测试分三层：`tests/<area>_contract.rs` 用文档 JSON 做 `serde_json::from_str`，验证 DTO / rename 映射；`tests/http_<area>.rs` 用 `wiremock` + `common::mock_account()`（内部 `PickcatAccound::with_base_url()`）断言方法、路径、query、请求头、请求体；`tests/<area>_live.rs` 打真实 API，全部标 `#[ignore = "hits the live API; ..."]`。
 - 需要 URL query 的接口：`reqwest` 0.13 的 `.query()` 由 `query` feature 控制，`Cargo.toml` 已启用。
 
 ## 容易踩的坑

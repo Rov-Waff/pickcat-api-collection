@@ -1,3 +1,5 @@
+//! 主题与内容 DTO。
+
 use serde::{Deserialize, Serialize};
 
 use super::user::{PageInfoDTO, TopicAuthorDTO, UserSubjectInfoDTO, UserSubjectTagDTO};

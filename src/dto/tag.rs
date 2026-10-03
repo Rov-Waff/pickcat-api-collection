@@ -1,3 +1,5 @@
+//! 分区标签 DTO。
+
 use serde::{Deserialize, Serialize};
 
 /// 分区标签项。

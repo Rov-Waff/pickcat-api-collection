@@ -1,3 +1,5 @@
+//! 阅读会话 DTO。
+
 use serde::{Deserialize, Serialize};
 
 use super::user::LevelFamiliarityDTO;

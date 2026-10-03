@@ -1,3 +1,7 @@
+//! 阅读会话章节：阅读埋点上报。
+//!
+//! 参见 <https://pickcat-docs.xiaole6324.fun/reading-session.html>。
+
 use crate::dto::reading_session::{ReadingBatchDTO, ReadingBatchResponseDTO, VisiblePostDTO};
 use crate::{Error, PickcatAccound};
 

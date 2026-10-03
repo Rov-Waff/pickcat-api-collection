@@ -1,3 +1,7 @@
+//! 分区标签章节。
+//!
+//! 参见 <https://pickcat-docs.xiaole6324.fun/tag.html>。
+
 use crate::dto::tag::{TagSidebarLinksDTO, TagsDTO};
 use crate::{Error, PickcatAccound};
 

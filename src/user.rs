@@ -1,3 +1,7 @@
+//! 用户章节：资料、邮箱、关注/粉丝、主题/回帖、徽章、动态、等级、配额等。
+//!
+//! 参见 <https://pickcat-docs.xiaole6324.fun/user.html>。
+
 use crate::dto::user::*;
 use crate::{Error, PickcatAccound};
 

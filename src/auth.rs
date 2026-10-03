@@ -1,3 +1,7 @@
+//! 鉴权与入站考试：会话、注册、邮箱验证、考试流程。
+//!
+//! 参见 <https://pickcat-docs.xiaole6324.fun/auth.html>。
+
 use crate::{Error, PickcatAccound};
 
 use crate::dto::auth::{

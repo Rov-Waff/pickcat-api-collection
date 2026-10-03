@@ -1,3 +1,5 @@
+//! 用户章节及跨章节共享的 DTO。
+
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

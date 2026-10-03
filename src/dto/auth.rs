@@ -1,3 +1,5 @@
+//! 鉴权与入站考试 DTO。
+
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]

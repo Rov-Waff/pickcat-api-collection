@@ -1,3 +1,7 @@
+//! 媒体资源章节：文件上传/读取、头像、表情。
+//!
+//! 参见 <https://pickcat-docs.xiaole6324.fun/media.html>。
+
 use crate::dto::media::{FileListDTO, UploadedFileDTO};
 use crate::{Error, PickcatAccound};
 

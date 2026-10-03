@@ -1,3 +1,7 @@
+//! 主题与内容章节：主题列表/推荐/详情、楼层、发布主题/回帖、投稿审核。
+//!
+//! 参见 <https://pickcat-docs.xiaole6324.fun/topic.html>。
+
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::time::{SystemTime, UNIX_EPOCH};
 

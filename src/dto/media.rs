@@ -1,3 +1,5 @@
+//! 媒体资源 DTO。
+
 use serde::{Deserialize, Serialize};
 
 use super::user::CursorListDTO;

@@ -1,3 +1,7 @@
+//! 通知章节（文档目前只记录了未读汇总接口）。
+//!
+//! 参见 <https://pickcat-docs.xiaole6324.fun/notification.html>。
+
 use crate::dto::notification::NotificationSummaryDTO;
 use crate::{Error, PickcatAccound};
 

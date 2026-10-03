@@ -1,3 +1,5 @@
+//! 通知 DTO。
+
 use std::collections::BTreeMap;
 
 use serde::{Deserialize, Serialize};
