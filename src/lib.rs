@@ -15,7 +15,7 @@ pub enum Error {
 
 pub mod dto;
 pub mod user;
-const BASE_URL: &str = "https://cdsq.dao3.fun/api/v1";
+const BASE_URL: &str = "https://cdsq.dao3.fun";
 #[derive(Debug)]
 pub struct PickcatAccound {
     pub username: String,

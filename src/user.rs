@@ -1,8 +1,8 @@
 use crate::{BASE_URL, Error, PickcatAccound};
 
 use crate::dto::user::{
-    CurrentQuestionDTO, ExamStatusDTO, RegistrationDTO, SessionDTO, StartExamDTO,
-    SubmitExamAnswerDTO, VerifyEmailDTO,
+    CurrentQuestionDTO, ExamStatusDTO, RegistrationDTO, SendRegistrationDTO, SessionDTO,
+    StartExamDTO, SubmitExamAnswerDTO, VerifyEmailDTO,
 };
 
 pub trait UserBehavior {
@@ -41,7 +41,7 @@ impl UserBehavior for PickcatAccound {
             .get(format!("{}/api/v1/session", BASE_URL))
             .send()
             .await?
-            .json::<SessionDTO>() 
+            .json::<SessionDTO>()
             .await?)
     }
 
@@ -51,7 +51,19 @@ impl UserBehavior for PickcatAccound {
         email: &str,
         captcha: &str,
     ) -> Result<RegistrationDTO, Error> {
-        todo!()
+        let dto = SendRegistrationDTO {
+            username: username.to_string(),
+            email: email.to_string(),
+            captcha_verify_param: captcha.to_string(),
+        };
+        Ok(self
+            .client
+            .post(format!("{}/api/v1/registrations", BASE_URL))
+            .json(&dto)
+            .send()
+            .await?
+            .json::<RegistrationDTO>()
+            .await?)
     }
 
     async fn verify_email(&self, code: &str, password: &str) -> Result<VerifyEmailDTO, Error> {
