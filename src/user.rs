@@ -1,8 +1,8 @@
 use crate::{BASE_URL, Error, PickcatAccound};
 
 use crate::dto::user::{
-    CurrentQuestionDTO, ExamStatusDTO, RegistrationDTO, SendRegistrationDTO, SessionDTO,
-    StartExamDTO, SubmitExamAnswerDTO, VerifyEmailDTO,
+    CurrentQuestionDTO, ExamStatusDTO, RegistrationDTO, SendRegistrationDTO, SendVerifyEmailDTO,
+    SessionDTO, StartExamDTO, SubmitExamAnswerDTO, SubmitExamAnswerResponseDTO, VerifyEmailDTO,
 };
 
 pub trait UserBehavior {
@@ -17,6 +17,7 @@ pub trait UserBehavior {
     ) -> impl std::future::Future<Output = Result<RegistrationDTO, Error>> + Send;
     fn verify_email(
         &self,
+        id: &str,
         code: &str,
         password: &str,
     ) -> impl Future<Output = Result<VerifyEmailDTO, Error>> + Send;
@@ -28,10 +29,11 @@ pub trait UserBehavior {
     ) -> impl Future<Output = Result<CurrentQuestionDTO, Error>> + Send;
     fn submit_answer(
         &self,
-        id: &str,
+        exam_id: &str,
+        question_id: &str,
         token: &str,
         selected_option_ids: Vec<String>,
-    ) -> impl Future<Output = Result<SubmitExamAnswerDTO, Error>> + Send;
+    ) -> impl Future<Output = Result<SubmitExamAnswerResponseDTO, Error>> + Send;
 }
 
 impl UserBehavior for PickcatAccound {
@@ -66,28 +68,81 @@ impl UserBehavior for PickcatAccound {
             .await?)
     }
 
-    async fn verify_email(&self, code: &str, password: &str) -> Result<VerifyEmailDTO, Error> {
-        todo!()
+    async fn verify_email(
+        &self,
+        code: &str,
+        password: &str,
+        id: &str,
+    ) -> Result<VerifyEmailDTO, Error> {
+        let dto = SendVerifyEmailDTO {
+            code: code.to_string(),
+            password: password.to_string(),
+        };
+        Ok(self
+            .client
+            .patch(format!("{}/api/v1/registrations/{}", BASE_URL, id))
+            .json(&dto)
+            .send()
+            .await?
+            .json::<VerifyEmailDTO>()
+            .await?)
     }
 
     async fn get_exam_status(&self) -> Result<ExamStatusDTO, Error> {
-        todo!()
+        Ok(self
+            .client
+            .get(format!("{}/api/v1/entrance-exam", BASE_URL))
+            .send()
+            .await?
+            .json::<ExamStatusDTO>()
+            .await?)
     }
 
     async fn start_exam(&self) -> Result<StartExamDTO, Error> {
-        todo!()
+        Ok(self
+            .client
+            .post(format!("{}/api/v1/entrance-exam/attempts", BASE_URL))
+            .send()
+            .await?
+            .json::<StartExamDTO>()
+            .await?)
     }
 
     async fn get_current_question(&self, id: &str) -> Result<CurrentQuestionDTO, Error> {
-        todo!()
+        Ok(self
+            .client
+            .get(format!(
+                "{}/api/v1/entrance-exam/attempts/{}/current-question",
+                BASE_URL, id
+            ))
+            .send()
+            .await?
+            .json::<CurrentQuestionDTO>()
+            .await?)
     }
 
     async fn submit_answer(
         &self,
-        id: &str,
+        exam_id: &str,
+        question_id: &str,
         token: &str,
         selected_option_ids: Vec<String>,
-    ) -> Result<SubmitExamAnswerDTO, Error> {
-        todo!()
+    ) -> Result<SubmitExamAnswerResponseDTO, Error> {
+        let dto = SubmitExamAnswerDTO {
+            question_id: question_id.to_string(),
+            delivery_token: token.to_string(),
+            selected_option_ids: selected_option_ids,
+        };
+        Ok(self
+            .client
+            .patch(format!(
+                "{}/api/v1/entrance-exam/attempts/{}/current-question",
+                BASE_URL, exam_id
+            ))
+            .json(&dto)
+            .send()
+            .await?
+            .json::<SubmitExamAnswerResponseDTO>()
+            .await?)
     }
 }

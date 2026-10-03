@@ -47,6 +47,12 @@ pub struct SendRegistrationDTO {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+pub struct SendVerifyEmailDTO {
+    pub code: String,
+    pub password: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
 pub struct AvatarFieldInUserDTO {
     #[serde(rename = "type")]
     pub typs: String,
@@ -169,6 +175,16 @@ pub struct CurrentQuestionDTO {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct SubmitExamAnswerDTO {
+    #[serde(rename = "questionId")]
+    pub question_id: String,
+    #[serde(rename = "deliveryToken")]
+    pub delivery_token: String,
+    #[serde(rename = "selectedOptionIds")]
+    pub selected_option_ids: Vec<String>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct SendSubmitAnswerDTO {
     #[serde(rename = "questionId")]
     pub question_id: String,
     #[serde(rename = "deliveryToken")]
