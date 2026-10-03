@@ -14,6 +14,7 @@ pub enum Error {
 }
 
 pub mod dto;
+pub mod auth;
 pub mod user;
 const BASE_URL: &str = "https://cdsq.dao3.fun";
 #[derive(Debug)]

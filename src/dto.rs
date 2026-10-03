@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-pub mod user;
+pub mod auth;
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct LoginDTO {
