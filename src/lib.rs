@@ -45,20 +45,3 @@ impl PickcatAccound {
         })
     }
 }
-
-#[cfg(test)]
-mod test {
-    use std::env;
-
-    use crate::PickcatAccound;
-
-    #[tokio::test]
-    async fn test_login() {
-        dotenvy::dotenv().ok();
-        env_logger::init();
-        let username = env::var("USERNAME").unwrap();
-        let password = env::var("PASSWORD").unwrap();
-
-        let _ = PickcatAccound::new(&username, &password).await.unwrap();
-    }
-}

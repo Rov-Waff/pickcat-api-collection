@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct AvatarFieldInUserFieldInSessionDTO {
+    #[serde(rename = "type")]
     pub typs: String,
     pub id: u32,
     pub url: String,
@@ -201,4 +202,3 @@ pub struct SubmitExamAnswerResponseDTO {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub result: Option<ExamStatusResultDTO>,
 }
-
