@@ -2,6 +2,8 @@
 name = "pickcat-api-collection"
 version = "0.1.0"
 edition = "2024"
+descriptions="PickcatAPI合集"
+license="MIT"
 
 [dependencies]
 anyhow = "1.0.104"
