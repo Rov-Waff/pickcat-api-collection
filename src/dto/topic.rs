@@ -31,6 +31,8 @@ pub struct TopicRecommendationsDTO {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PostViewerCapabilitiesDTO {
+    #[serde(default)]
+    pub can_pin: bool,
     pub can_edit: bool,
     pub can_like: bool,
     pub can_bookmark: bool,
@@ -79,7 +81,15 @@ pub struct TopicViewerCapabilitiesDTO {
     pub can_bookmark: bool,
     pub can_close: bool,
     pub can_reopen: bool,
+    #[serde(default)]
+    pub can_unselect_answer: bool,
+    #[serde(default)]
+    pub can_clear_duplicate: bool,
+    #[serde(default)]
+    pub can_mark_duplicate: bool,
     pub can_pin_globally: bool,
+    #[serde(default)]
+    pub can_unpin: bool,
     pub pinnable_tag_ids: Vec<String>,
 }
 
@@ -87,6 +97,13 @@ pub struct TopicViewerCapabilitiesDTO {
 #[serde(rename_all = "camelCase")]
 pub struct TopicViewerStateDTO {
     pub bookmark_id: Option<String>,
+}
+
+/// 主题所属合集（`collection` 字段）。
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TopicCollectionDTO {
+    pub id: String,
+    pub name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -99,10 +116,10 @@ pub struct TopicDetailDTO {
     pub tags: Vec<UserSubjectTagDTO>,
     pub reply_count: u64,
     pub view_count: u64,
-    pub like_count: u64,
-    pub bookmark_count: u64,
-    /// 所属合集，结构未文档化。
-    pub collection: Option<serde_json::Value>,
+    /// 详情响应可能省略计数（未登录或无权限时）。
+    pub like_count: Option<u64>,
+    pub bookmark_count: Option<u64>,
+    pub collection: Option<TopicCollectionDTO>,
     pub closed_at: Option<String>,
     /// 关闭操作人；文档标注为 DateTime/String，实际类型未验证。
     pub closed_by: Option<serde_json::Value>,

@@ -125,6 +125,41 @@ fn parses_topic_detail_payload() {
 }
 
 #[test]
+fn parses_real_topic_detail_payload() {
+    common::init_logging();
+    info!("parsing real /api/v1/topics/{{id}} payload");
+    let topic: TopicDetailDTO =
+        serde_json::from_str(include_str!("fixtures/topic_detail_real.json"))
+            .expect("real topic detail payload must deserialize");
+
+    debug!("parsed real topic detail: {topic:?}");
+    assert_eq!(topic.id, "01a0e17c-b7fc-7454-a664-935665f1a61b");
+    assert_eq!(topic.kind, "DISCUSSION");
+    assert_eq!(
+        topic.collection.as_ref().map(|c| c.name.as_str()),
+        Some("飞行模拟系列")
+    );
+
+    // 详情响应省略 likeCount / bookmarkCount
+    assert!(topic.like_count.is_none());
+    assert!(topic.bookmark_count.is_none());
+
+    // CUSTOM 头像的 id 是字符串 UUID
+    match &topic.author.avatar.id {
+        pickcat_api_collection::dto::IdValue::Str(id) => {
+            assert_eq!(id, "01a0fb0a-5baa-7389-a270-fee99701609a");
+        }
+        other => panic!("expected CUSTOM avatar string id, got {other:?}"),
+    }
+
+    // 楼层与主题的 viewerCapabilities 新字段
+    assert!(!topic.first_post.viewer_capabilities.can_pin);
+    assert!(!topic.viewer_capabilities.can_mark_duplicate);
+    assert!(!topic.viewer_capabilities.can_unpin);
+    assert!(topic.viewer_capabilities.pinnable_tag_ids.is_empty());
+}
+
+#[test]
 fn parses_topic_posts_payload() {
     common::init_logging();
     info!("parsing topic posts fixture");

@@ -1,0 +1,97 @@
+{
+  "collection": {
+    "id": "01a10563-73fe-7376-b260-2f691709514d",
+    "name": "飞行模拟系列"
+  },
+  "id": "01a0e17c-b7fc-7454-a664-935665f1a61b",
+  "title": "A330模拟飞行正式版",
+  "kind": "DISCUSSION",
+  "author": {
+    "id": "01a0e126-da57-74e9-9698-31e3c35750ea",
+    "username": "chinaairA330neo",
+    "avatar": {
+      "type": "CUSTOM",
+      "id": "01a0fb0a-5baa-7389-a270-fee99701609a",
+      "url": "/api/v1/avatars/01a0fb0a-5baa-7389-a270-fee99701609a"
+    },
+    "displayedBadge": null
+  },
+  "tags": [
+    {
+      "id": "01a0ab26-84a8-718b-996a-36be3dda4fa4",
+      "slug": "creative-works",
+      "name": "创作与作品"
+    }
+  ],
+  "replyCount": 16,
+  "viewCount": 17,
+  "closedAt": null,
+  "closedBy": null,
+  "pinned": false,
+  "pinnedGlobally": false,
+  "pinnedTagId": null,
+  "pinnedAt": null,
+  "pinnedUntil": null,
+  "lastActivityAt": "2026-10-04T09:47:59.284Z",
+  "createdAt": "2026-09-27T06:10:42.289Z",
+  "editedAt": null,
+  "updatedAt": "2026-10-04T09:47:59.284Z",
+  "firstPost": {
+    "id": "01a0e17c-b800-7791-847d-dff79361a808",
+    "topicId": "01a0e17c-b7fc-7454-a664-935665f1a61b",
+    "postNumber": 1,
+    "replyToPostNumber": null,
+    "deleted": false,
+    "children": [],
+    "currentRevision": 1,
+    "likeCount": 3,
+    "pinned": false,
+    "cookedHtml": "<div class=\"codemao-work-box\"><iframe src=\"https://player.codemao.cn/new/310251779\" title=\"编程猫作品播放器\" loading=\"lazy\" sandbox=\"allow-scripts allow-same-origin\" allow=\"fullscreen\" referrerpolicy=\"strict-origin-when-cross-origin\"></iframe><a class=\"codemao-work-box-link\" href=\"https://player.codemao.cn/new/310251779\" target=\"_blank\" rel=\"noopener noreferrer\">打开原页面</a></div>\n<p>感谢支持！</p>\n",
+    "author": {
+      "id": "01a0e126-da57-74e9-9698-31e3c35750ea",
+      "username": "chinaairA330neo",
+      "avatar": {
+        "type": "CUSTOM",
+        "id": "01a0fb0a-5baa-7389-a270-fee99701609a",
+        "url": "/api/v1/avatars/01a0fb0a-5baa-7389-a270-fee99701609a"
+      },
+      "displayedBadge": null
+    },
+    "createdAt": "2026-09-27T06:10:42.289Z",
+    "editedAt": null,
+    "viewerCapabilities": {
+      "canPin": false,
+      "canEdit": false,
+      "canDelete": false,
+      "canLike": false,
+      "canBookmark": false,
+      "canReport": false,
+      "canSelectAnswer": false
+    },
+    "viewerState": {
+      "liked": false,
+      "bookmarkId": null,
+      "selectedAnswer": false
+    }
+  },
+  "repliesTruncated": true,
+  "events": [],
+  "eventsTruncated": false,
+  "viewerCapabilities": {
+    "canEdit": false,
+    "canReply": false,
+    "canDelete": false,
+    "canBookmark": false,
+    "canClose": false,
+    "canReopen": false,
+    "canUnselectAnswer": false,
+    "canClearDuplicate": false,
+    "canMarkDuplicate": false,
+    "pinnableTagIds": [],
+    "canPinGlobally": false,
+    "canUnpin": false
+  },
+  "viewerState": {
+    "bookmarkId": null
+  }
+}
