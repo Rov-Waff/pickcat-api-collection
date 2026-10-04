@@ -22,7 +22,7 @@ pub struct GetUserInformationDTO {
 pub struct UserAvatarDTO {
     #[serde(rename = "type")]
     pub avatar_type: String,
-    pub id: u64,
+    pub id: String,
     pub url: String,
 }
 
@@ -425,7 +425,7 @@ pub struct FileStorageDTO {
 pub struct AvatarPresetDTO {
     #[serde(rename = "type")]
     pub avatar_type: String,
-    pub id: u64,
+    pub id: String,
     pub url: String,
 }
 
