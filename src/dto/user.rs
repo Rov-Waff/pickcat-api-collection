@@ -2,6 +2,8 @@
 
 use serde::{Deserialize, Serialize};
 
+use crate::dto::IdValue;
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetUserInformationDTO {
@@ -22,7 +24,7 @@ pub struct GetUserInformationDTO {
 pub struct UserAvatarDTO {
     #[serde(rename = "type")]
     pub avatar_type: String,
-    pub id: String,
+    pub id: IdValue,
     pub url: String,
 }
 
@@ -425,7 +427,7 @@ pub struct FileStorageDTO {
 pub struct AvatarPresetDTO {
     #[serde(rename = "type")]
     pub avatar_type: String,
-    pub id: String,
+    pub id: IdValue,
     pub url: String,
 }
 

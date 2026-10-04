@@ -7,7 +7,7 @@
 mod common;
 
 use log::{debug, info};
-use pickcat_api_collection::dto::user::*;
+use pickcat_api_collection::dto::{IdValue, user::*};
 
 /// A complete author object as returned by the API (the docs abbreviate it).
 const AUTHOR: &str = r#"{
@@ -53,7 +53,7 @@ fn parses_user_information_payload() {
 
     assert_eq!(user.username, "CarbonPremium");
     assert_eq!(user.avatar.avatar_type, "PRESET");
-    assert_eq!(user.avatar.id, 1);
+    assert_eq!(user.avatar.id, IdValue::Num(1));
     assert_eq!(user.level.current, 1);
     assert!(user.bio.is_none());
     assert!(!user.viewer_state.can_follow);

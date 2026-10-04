@@ -18,3 +18,10 @@ pub struct LoginDTO {
     pub username: String,
     pub password: String,
 }
+
+#[derive(Debug,Clone,Serialize,Deserialize)]
+#[serde(untagged)]
+pub enum IdValue{
+    Num(u64),
+    Str(String)
+}
